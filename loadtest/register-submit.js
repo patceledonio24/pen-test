@@ -11,7 +11,6 @@ const nextPageMarker = __ENV.NEXT_PAGE_MARKER || '';
 const requireNextPage = __ENV.REQUIRE_NEXT_PAGE === 'YES';
 const minPagesReached = Number(__ENV.MIN_PAGES_REACHED || '2');
 const maxRedirectSteps = Number(__ENV.MAX_REDIRECT_STEPS || '5');
-const debugResponse = __ENV.DEBUG_RESPONSE === 'YES';
 
 if (!baseUrl) {
   throw new Error('Missing TARGET_URL. Example: TARGET_URL="https://example.com/REG"');
@@ -53,10 +52,7 @@ function absoluteUrl(base, path) {
 function followRedirectChain(startUrl) {
   const responses = [];
   let currentUrl = startUrl;
-  const seen = new Set();
   for (let i = 0; i < maxRedirectSteps && currentUrl; i += 1) {
-    if (seen.has(currentUrl)) break;
-    seen.add(currentUrl);
     const res = http.get(currentUrl, { redirects: 0, timeout: '30s' });
     responses.push(res);
     const location = res.headers.Location || res.headers.location || '';
@@ -64,20 +60,6 @@ function followRedirectChain(startUrl) {
     currentUrl = absoluteUrl(baseUrl, location);
   }
   return responses;
-}
-
-function extractClientRedirect(html) {
-  const body = String(html || '');
-  const patterns = [
-    /window\.location(?:\.href)?\s*=\s*['"]([^'"]+)['"]/i,
-    /location\.replace\(\s*['"]([^'"]+)['"]\s*\)/i,
-    /<meta[^>]+http-equiv=['"]refresh['"][^>]+content=['"][^;]+;\s*url=([^'">\s]+)['"]/i,
-  ];
-  for (const re of patterns) {
-    const match = body.match(re);
-    if (match && match[1]) return match[1].trim();
-  }
-  return '';
 }
 
 export default function () {
@@ -111,21 +93,17 @@ export default function () {
   });
 
   const firstLocation = submitRes.headers.Location || submitRes.headers.location || '';
-  const firstClientRedirect = extractClientRedirect(submitRes.body);
-  const firstRedirectUrl = absoluteUrl(baseUrl, firstLocation || firstClientRedirect);
+  const firstRedirectUrl = absoluteUrl(baseUrl, firstLocation);
   const chainedResponses = firstRedirectUrl ? followRedirectChain(firstRedirectUrl) : [];
   const lastRes = chainedResponses.length ? chainedResponses[chainedResponses.length - 1] : submitRes;
   const effectiveBody = String(lastRes.body || '');
 
-  const pagesReached = 1 + chainedResponses.length;
-  const saveSignal =
-    submitRes.status === 302 ||
-    pagesReached >= 2 ||
-    String(submitRes.body || '').toLowerCase().includes(successMarker.toLowerCase());
+  const pagesReached = 1 + (firstRedirectUrl ? 1 : 0) + chainedResponses.length;
 
   check(submitRes, {
     'submit accepted (200/302)': (r) => r.status === 200 || r.status === 302,
-    'response indicates save/success': () => saveSignal,
+    'response indicates save/success': (r) =>
+      String(r.body || '').toLowerCase().includes(successMarker.toLowerCase()) || r.status === 302,
     'next page reached when required': () => !requireNextPage || pagesReached >= 2,
     'minimum pages reached': () => pagesReached >= minPagesReached,
   });
@@ -135,14 +113,6 @@ export default function () {
       'configured marker found on final reached page': () =>
         effectiveBody.toLowerCase().includes(nextPageMarker.toLowerCase()),
     });
-  }
-
-  if (debugResponse && pagesReached < minPagesReached) {
-    console.warn(
-      `[debug] pagesReached=${pagesReached}, submitStatus=${submitRes.status}, submitURL=${submitRes.url}, firstLocation=${firstLocation || '<none>'}, firstClientRedirect=${firstClientRedirect || '<none>'}`,
-    );
-    const snippet = String(submitRes.body || '').replace(/\s+/g, ' ').slice(0, 280);
-    console.warn(`[debug] submit body snippet: ${snippet}`);
   }
 
   sleep(thinkTimeSeconds);

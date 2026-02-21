@@ -5,12 +5,11 @@ TARGET_URL="${1:-${TARGET_URL:-}}"
 MODE="${MODE:-smoke}"
 VUS="${VUS:-10}"
 DURATION="${DURATION:-60s}"
-FORM_DATA_FILE="${FORM_DATA_FILE:-sample-registration-full.json}"
+FORM_DATA_FILE="${FORM_DATA_FILE:-sample-registration.json}"
 REQUIRE_NEXT_PAGE="${REQUIRE_NEXT_PAGE:-NO}"
 NEXT_PAGE_MARKER="${NEXT_PAGE_MARKER:-}"
 MIN_PAGES_REACHED="${MIN_PAGES_REACHED:-2}"
 MAX_REDIRECT_STEPS="${MAX_REDIRECT_STEPS:-5}"
-DEBUG_RESPONSE="${DEBUG_RESPONSE:-NO}"
 
 if [[ -z "${TARGET_URL}" ]]; then
   cat <<'USAGE'
@@ -25,7 +24,7 @@ Examples:
   ./run-loadtest.sh https://nsdga.evolvesoftware.com.ph/REG
   MODE=register VUS=1 DURATION=30s ./run-loadtest.sh https://nsdga.evolvesoftware.com.ph/REG
   MODE=register REQUIRE_NEXT_PAGE=YES NEXT_PAGE_MARKER="Upload" ./run-loadtest.sh https://nsdga.evolvesoftware.com.ph/REG
-  MODE=register FORM_DATA_FILE=sample-registration-full.json MIN_PAGES_REACHED=3 NEXT_PAGE_MARKER="Confirmation" DEBUG_RESPONSE=YES ./run-loadtest.sh https://nsdga.evolvesoftware.com.ph/REG
+  MODE=register MIN_PAGES_REACHED=3 NEXT_PAGE_MARKER="Confirmation" ./run-loadtest.sh https://nsdga.evolvesoftware.com.ph/REG
 USAGE
   exit 1
 fi
@@ -52,12 +51,10 @@ if [[ "${MODE}" == "register" ]]; then
   export NEXT_PAGE_MARKER
   export MIN_PAGES_REACHED
   export MAX_REDIRECT_STEPS
-  export DEBUG_RESPONSE
   echo "[info] Running registration submit test against: ${TARGET_URL}"
   echo "[info] MODE=${MODE}, VUS=${VUS}, DURATION=${DURATION}, FORM_DATA_FILE=${FORM_DATA_FILE}"
   echo "[info] REQUIRE_NEXT_PAGE=${REQUIRE_NEXT_PAGE}, NEXT_PAGE_MARKER=${NEXT_PAGE_MARKER:-<none>}"
   echo "[info] MIN_PAGES_REACHED=${MIN_PAGES_REACHED}, MAX_REDIRECT_STEPS=${MAX_REDIRECT_STEPS}"
-  echo "[info] DEBUG_RESPONSE=${DEBUG_RESPONSE}"
   k6 run loadtest/register-submit.js
 else
   echo "[info] Running smoke test against: ${TARGET_URL}"
