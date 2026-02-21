@@ -2,14 +2,9 @@
 
 Source checked: `https://nsdga.evolvesoftware.com.ph/REG`.
 
-## Important clarification
+## Required hints from the HTML (`data-val-required`)
 
-You **are passing through page 1** (the first registration form loads and POST is sent).
-When checks fail for next page/page 3, it means the server likely kept you on page 1 due to validation/data rules.
-
-## Required hints from HTML (`data-val-required`)
-
-These controls expose required hints:
+These controls expose required validation hints on the page:
 
 - `LevelCode`
 - `StrandCode`
@@ -19,17 +14,29 @@ These controls expose required hints:
 - `NationalityCode`
 - `OneSchoolFundTypeCode`
 
-## Full-field template added
+## Common fields you should fill for successful save
 
-Use `sample-registration-full.json` to send nearly all detected form fields (excluding UI-only/internal fields such as `btnSubmit`, `btnCancel`, and `*$DDD$*`).
+Based on the current live form structure, fill at least:
 
-Generate/update this file from current live field inventory:
+- School level: `LevelCode`, `LevelCode_VI`
+- Strand: `StrandCode`, `StrandCode_VI` (for SHS level)
+- Name: `Lastname`, `Firstname`, `Middlename` (or `MiddleInitial`)
+- Birth details: `Birthdate`, `Birthplace`
+- Demographics: `GenderCode`, `GenderCode_VI`, `NationalityCode`, `NationalityCode_VI`, `ReligionCode`, `ReligionCode_VI`
+- Contact: `EmailAddress`, `ReEmailAddress`, `MobileNo`, `PrimaryAddress`
+- Parent/guardian basics: `MothersLastname`, `MothersFirstname`, `MothersContactNo`, `FathersLastname`, `FathersFirstName`, `FathersContactNo`
+- Previous school: `OneSchool`, `OneDivision`, `OneSchoolFundTypeCode`, `OneSchoolFundTypeCode_VI`
+- Learner ref: `LRN`
+
+> Note: dropdowns in this form often use both visible text fields and hidden `*_VI` values.
+> Use valid code values from your environment to avoid server-side validation errors.
+
+## Regenerate field inventory
+
+Run:
 
 ```bash
-python tools/generate_full_payload_template.py
+python tools/extract_registration_fields.py > registration-fields.json
 ```
 
-## Notes
-
-- Dropdown fields often require both visible text and hidden `*_VI` code value.
-- If values are not valid for the current staging configuration, server may not advance to next page.
+This produces an inventory of all detected input names from the live page.
