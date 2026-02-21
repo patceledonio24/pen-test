@@ -1,60 +1,32 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-RUNNER_VERSION="2026-02-21.1"
-
 TARGET_URL="${1:-${TARGET_URL:-}}"
 MODE="${MODE:-smoke}"
 VUS="${VUS:-10}"
 DURATION="${DURATION:-60s}"
-FORM_DATA_FILE="${FORM_DATA_FILE:-sample-registration-full.json}"
+FORM_DATA_FILE="${FORM_DATA_FILE:-sample-registration.json}"
 REQUIRE_NEXT_PAGE="${REQUIRE_NEXT_PAGE:-NO}"
 NEXT_PAGE_MARKER="${NEXT_PAGE_MARKER:-}"
 MIN_PAGES_REACHED="${MIN_PAGES_REACHED:-2}"
 MAX_REDIRECT_STEPS="${MAX_REDIRECT_STEPS:-5}"
-DEBUG_RESPONSE="${DEBUG_RESPONSE:-NO}"
-STRICT_SAVE_SIGNAL="${STRICT_SAVE_SIGNAL:-YES}"
 
 if [[ -z "${TARGET_URL}" ]]; then
   cat <<'USAGE'
 Usage:
   ./run-loadtest.sh <target-url>
-  ./run-loadtest.sh --doctor
 
 Modes:
   MODE=smoke        # GET load only (default)
   MODE=register     # GET + POST submit registration form
 
-Options:
-  --doctor          # print runner/script version diagnostics
-
 Examples:
   ./run-loadtest.sh https://nsdga.evolvesoftware.com.ph/REG
   MODE=register VUS=1 DURATION=30s ./run-loadtest.sh https://nsdga.evolvesoftware.com.ph/REG
   MODE=register REQUIRE_NEXT_PAGE=YES NEXT_PAGE_MARKER="Upload" ./run-loadtest.sh https://nsdga.evolvesoftware.com.ph/REG
-  MODE=register FORM_DATA_FILE=sample-registration-full.json MIN_PAGES_REACHED=3 NEXT_PAGE_MARKER="Confirmation" DEBUG_RESPONSE=YES STRICT_SAVE_SIGNAL=YES ./run-loadtest.sh https://nsdga.evolvesoftware.com.ph/REG
+  MODE=register MIN_PAGES_REACHED=3 NEXT_PAGE_MARKER="Confirmation" ./run-loadtest.sh https://nsdga.evolvesoftware.com.ph/REG
 USAGE
   exit 1
-fi
-
-if [[ "${TARGET_URL}" == "--doctor" ]]; then
-  echo "[doctor] runner_version=${RUNNER_VERSION}"
-  echo "[doctor] shell=$(basename "${SHELL:-unknown}")"
-  if [[ -f "loadtest/register-submit.js" ]]; then
-    if grep -q "no page-1 validation errors detected" loadtest/register-submit.js; then
-      echo "[doctor] register_script_check=ok (validation check present)"
-    else
-      echo "[doctor] register_script_check=outdated (validation check missing)"
-    fi
-  else
-    echo "[doctor] register_script_check=missing"
-  fi
-  if grep -q "DEBUG_RESPONSE" "$0"; then
-    echo "[doctor] runner_flags=ok (DEBUG_RESPONSE/STRICT_SAVE_SIGNAL supported)"
-  else
-    echo "[doctor] runner_flags=outdated"
-  fi
-  exit 0
 fi
 
 if ! command -v k6 >/dev/null 2>&1; then
@@ -79,17 +51,12 @@ if [[ "${MODE}" == "register" ]]; then
   export NEXT_PAGE_MARKER
   export MIN_PAGES_REACHED
   export MAX_REDIRECT_STEPS
-  export DEBUG_RESPONSE
-  export STRICT_SAVE_SIGNAL
-  echo "[info] Runner version: ${RUNNER_VERSION}"
   echo "[info] Running registration submit test against: ${TARGET_URL}"
   echo "[info] MODE=${MODE}, VUS=${VUS}, DURATION=${DURATION}, FORM_DATA_FILE=${FORM_DATA_FILE}"
   echo "[info] REQUIRE_NEXT_PAGE=${REQUIRE_NEXT_PAGE}, NEXT_PAGE_MARKER=${NEXT_PAGE_MARKER:-<none>}"
   echo "[info] MIN_PAGES_REACHED=${MIN_PAGES_REACHED}, MAX_REDIRECT_STEPS=${MAX_REDIRECT_STEPS}"
-  echo "[info] DEBUG_RESPONSE=${DEBUG_RESPONSE}, STRICT_SAVE_SIGNAL=${STRICT_SAVE_SIGNAL}"
   k6 run loadtest/register-submit.js
 else
-  echo "[info] Runner version: ${RUNNER_VERSION}"
   echo "[info] Running smoke test against: ${TARGET_URL}"
   echo "[info] MODE=${MODE}, VUS=${VUS}, DURATION=${DURATION}"
   k6 run loadtest/smoke.js
