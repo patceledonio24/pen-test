@@ -5,7 +5,7 @@ TARGET_URL="${1:-${TARGET_URL:-}}"
 MODE="${MODE:-smoke}"
 VUS="${VUS:-10}"
 DURATION="${DURATION:-60s}"
-FORM_DATA_FILE="${FORM_DATA_FILE:-sample-registration-full.json}"
+FORM_DATA_FILE="${FORM_DATA_FILE:-sample-registration.json}"
 REQUIRE_NEXT_PAGE="${REQUIRE_NEXT_PAGE:-NO}"
 NEXT_PAGE_MARKER="${NEXT_PAGE_MARKER:-}"
 MIN_PAGES_REACHED="${MIN_PAGES_REACHED:-2}"
@@ -24,7 +24,7 @@ Examples:
   ./run-loadtest.sh https://nsdga.evolvesoftware.com.ph/REG
   MODE=register VUS=1 DURATION=30s ./run-loadtest.sh https://nsdga.evolvesoftware.com.ph/REG
   MODE=register REQUIRE_NEXT_PAGE=YES NEXT_PAGE_MARKER="Upload" ./run-loadtest.sh https://nsdga.evolvesoftware.com.ph/REG
-  MODE=register FORM_DATA_FILE=sample-registration-full.json MIN_PAGES_REACHED=3 NEXT_PAGE_MARKER="Confirmation" ./run-loadtest.sh https://nsdga.evolvesoftware.com.ph/REG
+  MODE=register MIN_PAGES_REACHED=3 NEXT_PAGE_MARKER="Confirmation" ./run-loadtest.sh https://nsdga.evolvesoftware.com.ph/REG
 USAGE
   exit 1
 fi
