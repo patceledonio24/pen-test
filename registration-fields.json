@@ -1,0 +1,510 @@
+{
+  "url": "https://nsdga.evolvesoftware.com.ph/REG",
+  "required_hints": [],
+  "fields": [
+    {
+      "name": "LevelCode_VI",
+      "tag": "input",
+      "type": "hidden",
+      "id": "LevelCode_VI",
+      "value_hint": "",
+      "required_hint": false
+    },
+    {
+      "name": "LevelCode",
+      "tag": "input",
+      "type": "text",
+      "id": "LevelCode_I",
+      "value_hint": "Select Level",
+      "required_hint": false
+    },
+    {
+      "name": "LevelCode$DDD$L",
+      "tag": "input",
+      "type": "hidden",
+      "id": "LevelCode_DDD_L_VI",
+      "value_hint": "",
+      "required_hint": false
+    },
+    {
+      "name": "StrandCode_VI",
+      "tag": "input",
+      "type": "hidden",
+      "id": "StrandCode_VI",
+      "value_hint": "",
+      "required_hint": false
+    },
+    {
+      "name": "StrandCode",
+      "tag": "input",
+      "type": "text",
+      "id": "StrandCode_I",
+      "value_hint": "Select Strand",
+      "required_hint": false
+    },
+    {
+      "name": "StrandCode$DDD$L",
+      "tag": "input",
+      "type": "hidden",
+      "id": "StrandCode_DDD_L_VI",
+      "value_hint": "",
+      "required_hint": false
+    },
+    {
+      "name": "Lastname",
+      "tag": "input",
+      "type": "text",
+      "id": "Lastname_I",
+      "value_hint": "Last Name",
+      "required_hint": false
+    },
+    {
+      "name": "Firstname",
+      "tag": "input",
+      "type": "text",
+      "id": "Firstname_I",
+      "value_hint": "First Name",
+      "required_hint": false
+    },
+    {
+      "name": "Middlename",
+      "tag": "input",
+      "type": "text",
+      "id": "Middlename_I",
+      "value_hint": "Middle Name",
+      "required_hint": false
+    },
+    {
+      "name": "MiddleInitial",
+      "tag": "input",
+      "type": "text",
+      "id": "MiddleInitial_I",
+      "value_hint": "Middle Initial",
+      "required_hint": false
+    },
+    {
+      "name": "Nickname",
+      "tag": "input",
+      "type": "text",
+      "id": "Nickname_I",
+      "value_hint": "Nickname",
+      "required_hint": false
+    },
+    {
+      "name": "ReligionCode_VI",
+      "tag": "input",
+      "type": "hidden",
+      "id": "ReligionCode_VI",
+      "value_hint": "",
+      "required_hint": false
+    },
+    {
+      "name": "ReligionCode",
+      "tag": "input",
+      "type": "text",
+      "id": "ReligionCode_I",
+      "value_hint": "Religion",
+      "required_hint": false
+    },
+    {
+      "name": "ReligionCode$DDD$L",
+      "tag": "input",
+      "type": "hidden",
+      "id": "ReligionCode_DDD_L_VI",
+      "value_hint": "",
+      "required_hint": false
+    },
+    {
+      "name": "Birthdate",
+      "tag": "input",
+      "type": "text",
+      "id": "Birthdate_I",
+      "value_hint": "Birth Date",
+      "required_hint": false
+    },
+    {
+      "name": "Birthplace",
+      "tag": "input",
+      "type": "text",
+      "id": "Birthplace_I",
+      "value_hint": "Birthplace",
+      "required_hint": false
+    },
+    {
+      "name": "GenderCode_VI",
+      "tag": "input",
+      "type": "hidden",
+      "id": "GenderCode_VI",
+      "value_hint": "",
+      "required_hint": false
+    },
+    {
+      "name": "GenderCode",
+      "tag": "input",
+      "type": "text",
+      "id": "GenderCode_I",
+      "value_hint": "Sex",
+      "required_hint": false
+    },
+    {
+      "name": "GenderCode$DDD$L",
+      "tag": "input",
+      "type": "hidden",
+      "id": "GenderCode_DDD_L_VI",
+      "value_hint": "",
+      "required_hint": false
+    },
+    {
+      "name": "NationalityCode_VI",
+      "tag": "input",
+      "type": "hidden",
+      "id": "NationalityCode_VI",
+      "value_hint": "",
+      "required_hint": false
+    },
+    {
+      "name": "NationalityCode",
+      "tag": "input",
+      "type": "text",
+      "id": "NationalityCode_I",
+      "value_hint": "Nationality",
+      "required_hint": false
+    },
+    {
+      "name": "NationalityCode$DDD$L",
+      "tag": "input",
+      "type": "hidden",
+      "id": "NationalityCode_DDD_L_VI",
+      "value_hint": "",
+      "required_hint": false
+    },
+    {
+      "name": "EmailAddress",
+      "tag": "input",
+      "type": "text",
+      "id": "EmailAddress_I",
+      "value_hint": "Email",
+      "required_hint": false
+    },
+    {
+      "name": "ReEmailAddress",
+      "tag": "input",
+      "type": "text",
+      "id": "ReEmailAddress_I",
+      "value_hint": "Re-Enter Email",
+      "required_hint": false
+    },
+    {
+      "name": "MobileNo",
+      "tag": "input",
+      "type": "text",
+      "id": "MobileNo_I",
+      "value_hint": "Mobile No.",
+      "required_hint": false
+    },
+    {
+      "name": "PrimaryTelNo",
+      "tag": "input",
+      "type": "text",
+      "id": "PrimaryTelNo_I",
+      "value_hint": "Telephone No.",
+      "required_hint": false
+    },
+    {
+      "name": "PrimaryAddress",
+      "tag": "textarea",
+      "type": "",
+      "id": "PrimaryAddress_I",
+      "value_hint": "",
+      "required_hint": false
+    },
+    {
+      "name": "MothersLastname",
+      "tag": "input",
+      "type": "text",
+      "id": "MothersLastname_I",
+      "value_hint": "Mother&#39;s Last Name",
+      "required_hint": false
+    },
+    {
+      "name": "MothersFirstname",
+      "tag": "input",
+      "type": "text",
+      "id": "MothersFirstname_I",
+      "value_hint": "Mother&#39;s First Name",
+      "required_hint": false
+    },
+    {
+      "name": "MothersContactNo",
+      "tag": "input",
+      "type": "text",
+      "id": "MothersContactNo_I",
+      "value_hint": "Contact No.",
+      "required_hint": false
+    },
+    {
+      "name": "MothersOccupation",
+      "tag": "input",
+      "type": "text",
+      "id": "MothersOccupation_I",
+      "value_hint": "Occupation",
+      "required_hint": false
+    },
+    {
+      "name": "MothersEmailAddress",
+      "tag": "input",
+      "type": "text",
+      "id": "MothersEmailAddress_I",
+      "value_hint": "Email",
+      "required_hint": false
+    },
+    {
+      "name": "FathersLastname",
+      "tag": "input",
+      "type": "text",
+      "id": "FathersLastname_I",
+      "value_hint": "Father&#39;s Last Name",
+      "required_hint": false
+    },
+    {
+      "name": "FathersFirstName",
+      "tag": "input",
+      "type": "text",
+      "id": "FathersFirstName_I",
+      "value_hint": "Father&#39;s First Name",
+      "required_hint": false
+    },
+    {
+      "name": "FathersContactNo",
+      "tag": "input",
+      "type": "text",
+      "id": "FathersContactNo_I",
+      "value_hint": "Contact No.",
+      "required_hint": false
+    },
+    {
+      "name": "FathersOccupation",
+      "tag": "input",
+      "type": "text",
+      "id": "FathersOccupation_I",
+      "value_hint": "Occupation",
+      "required_hint": false
+    },
+    {
+      "name": "FathersEmailAddress",
+      "tag": "input",
+      "type": "text",
+      "id": "FathersEmailAddress_I",
+      "value_hint": "Email",
+      "required_hint": false
+    },
+    {
+      "name": "IDGuardianName",
+      "tag": "input",
+      "type": "text",
+      "id": "IDGuardianName_I",
+      "value_hint": "Guardian Name",
+      "required_hint": false
+    },
+    {
+      "name": "IDRelationshipCode_VI",
+      "tag": "input",
+      "type": "hidden",
+      "id": "IDRelationshipCode_VI",
+      "value_hint": "",
+      "required_hint": false
+    },
+    {
+      "name": "IDRelationshipCode",
+      "tag": "input",
+      "type": "text",
+      "id": "IDRelationshipCode_I",
+      "value_hint": "Relation",
+      "required_hint": false
+    },
+    {
+      "name": "IDRelationshipCode$DDD$L",
+      "tag": "input",
+      "type": "hidden",
+      "id": "IDRelationshipCode_DDD_L_VI",
+      "value_hint": "",
+      "required_hint": false
+    },
+    {
+      "name": "IDMobileNo",
+      "tag": "input",
+      "type": "text",
+      "id": "IDMobileNo_I",
+      "value_hint": "Contact No.",
+      "required_hint": false
+    },
+    {
+      "name": "IDEmailAddress",
+      "tag": "input",
+      "type": "text",
+      "id": "IDEmailAddress_I",
+      "value_hint": "EmailAddress",
+      "required_hint": false
+    },
+    {
+      "name": "IDPrimaryAddress",
+      "tag": "input",
+      "type": "text",
+      "id": "IDPrimaryAddress_I",
+      "value_hint": "Primary Address",
+      "required_hint": false
+    },
+    {
+      "name": "hasSiblings",
+      "tag": "input",
+      "type": "text",
+      "id": "hasSiblings_S",
+      "value_hint": "I",
+      "required_hint": false
+    },
+    {
+      "name": "OneLastname",
+      "tag": "input",
+      "type": "text",
+      "id": "OneLastname_I",
+      "value_hint": "Last Name",
+      "required_hint": false
+    },
+    {
+      "name": "OneFirstname",
+      "tag": "input",
+      "type": "text",
+      "id": "OneFirstname_I",
+      "value_hint": "First Name",
+      "required_hint": false
+    },
+    {
+      "name": "TwoLastName",
+      "tag": "input",
+      "type": "text",
+      "id": "TwoLastName_I",
+      "value_hint": "Last Name",
+      "required_hint": false
+    },
+    {
+      "name": "TwoFirstName",
+      "tag": "input",
+      "type": "text",
+      "id": "TwoFirstName_I",
+      "value_hint": "First Name",
+      "required_hint": false
+    },
+    {
+      "name": "ThreeLastName",
+      "tag": "input",
+      "type": "text",
+      "id": "ThreeLastName_I",
+      "value_hint": "Last Name",
+      "required_hint": false
+    },
+    {
+      "name": "ThreeFirstName",
+      "tag": "input",
+      "type": "text",
+      "id": "ThreeFirstName_I",
+      "value_hint": "First Name",
+      "required_hint": false
+    },
+    {
+      "name": "FourLastName",
+      "tag": "input",
+      "type": "text",
+      "id": "FourLastName_I",
+      "value_hint": "Last Name",
+      "required_hint": false
+    },
+    {
+      "name": "FourFirstName",
+      "tag": "input",
+      "type": "text",
+      "id": "FourFirstName_I",
+      "value_hint": "First Name",
+      "required_hint": false
+    },
+    {
+      "name": "FiveLastName",
+      "tag": "input",
+      "type": "text",
+      "id": "FiveLastName_I",
+      "value_hint": "Last Name",
+      "required_hint": false
+    },
+    {
+      "name": "FiveFirstName",
+      "tag": "input",
+      "type": "text",
+      "id": "FiveFirstName_I",
+      "value_hint": "First Name",
+      "required_hint": false
+    },
+    {
+      "name": "OneSchool",
+      "tag": "input",
+      "type": "text",
+      "id": "OneSchool_I",
+      "value_hint": "School",
+      "required_hint": false
+    },
+    {
+      "name": "OneDivision",
+      "tag": "input",
+      "type": "text",
+      "id": "OneDivision_I",
+      "value_hint": "Address",
+      "required_hint": false
+    },
+    {
+      "name": "OneSchoolFundTypeCode_VI",
+      "tag": "input",
+      "type": "hidden",
+      "id": "OneSchoolFundTypeCode_VI",
+      "value_hint": "",
+      "required_hint": false
+    },
+    {
+      "name": "OneSchoolFundTypeCode",
+      "tag": "input",
+      "type": "text",
+      "id": "OneSchoolFundTypeCode_I",
+      "value_hint": "School Type",
+      "required_hint": false
+    },
+    {
+      "name": "OneSchoolFundTypeCode$DDD$L",
+      "tag": "input",
+      "type": "hidden",
+      "id": "OneSchoolFundTypeCode_DDD_L_VI",
+      "value_hint": "",
+      "required_hint": false
+    },
+    {
+      "name": "LRN",
+      "tag": "input",
+      "type": "text",
+      "id": "LRN_I",
+      "value_hint": "LRN",
+      "required_hint": false
+    },
+    {
+      "name": "btnSubmit",
+      "tag": "input",
+      "type": "submit",
+      "id": "btnSubmit_I",
+      "value_hint": "Submit",
+      "required_hint": false
+    },
+    {
+      "name": "btnCancel",
+      "tag": "input",
+      "type": "submit",
+      "id": "btnCancel_I",
+      "value_hint": "Cancel",
+      "required_hint": false
+    }
+  ]
+}
